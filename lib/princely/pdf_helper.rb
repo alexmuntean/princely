@@ -15,6 +15,15 @@ module PdfHelper
       render_without_princely(options, *args, &block)
     end
   end
+ 
+  def asset_file_path(asset)
+    puts "*"*80
+    puts "finding asset #{asset}"
+    # Remove /assets/ from generated names and try and find a matching asset
+    found = Rails.application.assets.find_asset(asset.gsub(/\/assets\//, "")).try(:pathname) || asset
+    puts "found #{found}"
+    found
+  end 
 
   private
 
@@ -59,9 +68,5 @@ module PdfHelper
     html_string
   end
 
-  def asset_file_path(asset)
-    # Remove /assets/ from generated names and try and find a matching asset
-    Rails.application.assets.find_asset(asset.gsub(/\/assets\//, "")).try(:pathname) || asset
-  end
 
 end
