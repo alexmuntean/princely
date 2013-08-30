@@ -5,4 +5,4 @@ if Mime::Type.lookup_by_extension(:pdf) != 'application/pdf'
 end
 
 ActionController::Base.send(:include, PdfHelper)
-ActionController::Base.send(:include, PdfHelper::AssetSupport) if Rails::VERSION::MINOR > 0
+ActionController::Base.send(:include, PdfHelper::AssetSupport) # if Rails::VERSION::MINOR > 0
