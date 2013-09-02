@@ -74,7 +74,7 @@ class Princely
   #
   def exe_path
     # Add any standard cmd line arguments we need to pass
-    @exe_path << " --input=html --server --log=#{log_file} "
+    @exe_path << " --input=html5 --server --log=#{log_file} "
     @exe_path << @cmd_args
     @exe_path << @style_sheets
     return @exe_path
