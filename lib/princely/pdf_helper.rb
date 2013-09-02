@@ -17,11 +17,8 @@ module PdfHelper
   end
  
   def asset_file_path(asset)
-    puts "*"*80
-    puts "finding asset #{asset}"
     # Remove /assets/ from generated names and try and find a matching asset
     found = Rails.application.assets.find_asset(asset.gsub(/\/assets\//, "")).try(:pathname) || asset
-    puts "found #{found}"
     found
   end 
 
@@ -38,16 +35,17 @@ module PdfHelper
 
   private
 
-  def make_pdf(options = {})
+   def make_pdf(options = {})
     options[:stylesheets] ||= []
     options[:layout] ||= false
-    options[:template] ||= File.join(controller_path,action_name)
+    options[:template] ||= File.join(controller_path,action_name) unless options[:inline]
 
     prince = Princely.new()
     # Sets style sheets on PDF renderer
     prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
-    html_string = render_to_string(:inline => options[:inline], :template => options[:template], :layout => options[:layout])
+    # html_string = render_to_string(:inline => options[:inline], :template => options[:template], :layout => options[:layout])
+    html_string = render_to_string(options.slice(:template, :layout, :inline))
 
     html_string = localize_html_string(html_string)
 
