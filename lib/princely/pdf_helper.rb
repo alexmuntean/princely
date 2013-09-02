@@ -24,7 +24,7 @@ module PdfHelper
     puts "found #{found}"
     found
   end 
-  
+
   def localize_html_string(html_string)
     # Make all paths relative, on disk paths...
     html_string.gsub!(".com:/",".com/") # strip out bad attachment_fu URLs
@@ -47,7 +47,7 @@ module PdfHelper
     # Sets style sheets on PDF renderer
     prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
-    html_string = render_to_string(:template => options[:template], :layout => options[:layout])
+    html_string = render_to_string(:inline => options[:inline], :template => options[:template], :layout => options[:layout])
 
     html_string = localize_html_string(html_string)
 
