@@ -45,7 +45,8 @@ module PdfHelper
     prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
     # html_string = render_to_string(:inline => options[:inline], :template => options[:template], :layout => options[:layout])
-    html_string = render_to_string(options.slice(:template, :layout, :inline))
+    # html_string = render_to_string(options.slice(:template, :layout, :inline))
+    html_string = render_to_string(options)
 
     html_string = localize_html_string(html_string)
 
